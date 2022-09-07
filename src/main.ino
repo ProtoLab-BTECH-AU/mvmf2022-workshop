@@ -7,9 +7,18 @@
 
 #include "Particle.h"
 #include "variables.h"
+#include "light.h"
+
+#define SENSOR_GL5528_PIN A0
+
+double light = 0;
 
 void setup() {
   Particle.variable("version", VERSION);
+  Particle.variable("light", light);
 }
 
-void loop() {}
+void loop() {
+  light = ((double) getLight(SENSOR_GL5528_PIN)) / 4095;
+  delay(500);
+}
