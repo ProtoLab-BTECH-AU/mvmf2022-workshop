@@ -19,6 +19,8 @@ void setup() {
 }
 
 void loop() {
-  light = ((double) getLight(SENSOR_GL5528_PIN)) / 4095;
+  int lightNew = getLight(SENSOR_GL5528_PIN);
+  if (lightNew >= 2048) lightNew = 2048;
+  light = ((double) (lightNew)) / 2048;
   delay(500);
 }
