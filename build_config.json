@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "name": "argon",
+      "platform": "argon",
+      "deviceos": "5.0.0",
+      "test": false,
+      "settings": [],
+      "devices": [
+        "protolab_MHN4"
+      ]
+    }
+  ]
+}
