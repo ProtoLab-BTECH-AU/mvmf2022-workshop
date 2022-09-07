@@ -6,9 +6,10 @@
  */
 
 #include "Particle.h"
+#include "variables.h"
 
 void setup() {
+  Particle.variable("version", VERSION);
 }
 
-void loop() {
-}
+void loop() {}
