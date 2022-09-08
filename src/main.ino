@@ -12,14 +12,17 @@
 #define SENSOR_GL5528_PIN A0
 
 double light = 0;
+uint16_t lightRaw = 0;
 
 void setup() {
   Particle.variable("version", VERSION);
   Particle.variable("light", light);
+  Particle.variable("lightRaw", lightRaw);
 }
 
 void loop() {
-  int lightNew = getLight(SENSOR_GL5528_PIN);
+  lightRaw = getLight(SENSOR_GL5528_PIN);
+  int lightNew = lightRaw;
   if (lightNew >= 2048) lightNew = 2048;
   light = ((double) (lightNew)) / 2048;
   delay(500);
