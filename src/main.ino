@@ -12,7 +12,7 @@
 #define SENSOR_GL5528_PIN A0
 
 double light = 0;
-uint16_t lightRaw = 0;
+int lightRaw = 0;
 
 void setup() {
   Particle.variable("version", VERSION);
