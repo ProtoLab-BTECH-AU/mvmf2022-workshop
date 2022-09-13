@@ -32,6 +32,7 @@ int setLightThreshold(String newThreshold)
 
 void setup()
 {
+  Particle.publish("version", VERSION);
   Particle.variable("version", VERSION);
   Particle.variable("light", light);
   Particle.variable("lightRaw", lightRaw);
