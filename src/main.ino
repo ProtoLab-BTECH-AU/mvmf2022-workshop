@@ -13,17 +13,38 @@
 
 double light = 0;
 int lightRaw = 0;
+int lightThreshold = 2048;
 
-void setup() {
+int setLightThreshold(String newThreshold)
+{
+  try
+  {
+    lightThreshold = newThreshold.toInt();
+    return lightThreshold;
+  }
+  catch (const std::exception &e)
+  {
+    return -1;
+  }
+}
+
+void setup()
+{
   Particle.variable("version", VERSION);
   Particle.variable("light", light);
   Particle.variable("lightRaw", lightRaw);
+  Particle.variable("lightThreshold", lightThreshold);
+  Particle.function("setLightThreshold", setLightThreshold);
 }
 
-void loop() {
+void loop()
+{
   lightRaw = getLight(SENSOR_GL5528_PIN);
   int lightNew = lightRaw;
-  if (lightNew >= 2048) lightNew = 2048;
-  light = ((double) (lightNew)) / 2048;
+  if (lightNew >= lightThreshold)
+  {
+    lightNew = lightThreshold;
+  }
+  light = ((double)(lightNew)) / lightThreshold;
   delay(500);
 }
