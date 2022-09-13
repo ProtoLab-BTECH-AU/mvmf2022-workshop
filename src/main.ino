@@ -17,15 +17,17 @@ int lightThreshold = 2048;
 
 int setLightThreshold(String newThreshold)
 {
-  try
+  for (unsigned int i = 0; i < newThreshold.length(); i++)
   {
-    lightThreshold = newThreshold.toInt();
-    return lightThreshold;
+    if (newThreshold[i] < 48 || newThreshold[i] > 57)
+      return -1;
   }
-  catch (const std::exception &e)
-  {
+
+  if (newThreshold.toInt() <= 0)
     return -1;
-  }
+
+  lightThreshold = newThreshold.toInt();
+  return lightThreshold;
 }
 
 void setup()
