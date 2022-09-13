@@ -16,7 +16,7 @@
 
 ADXL345 adxl;
 double acceleration = 0.0;
-bool wasTapped = false;
+long long wasTapped = 0;
 
 double light = 0;
 int lightRaw = 0;
@@ -103,9 +103,9 @@ void setup()
 
 void loop()
 {
-  if (loopCounter % 5000 == 0)
+  if (Time.now() - wasTapped >= 5000)
   {
-    wasTapped = false;
+    wasTapped = 0;
   }
 
   lightRaw = getLight(SENSOR_GL5528_PIN);
@@ -122,7 +122,7 @@ void loop()
   double newAcceleration = sqrt(pow(accelerationArray[0], 2) + pow(accelerationArray[1], 2) + pow(accelerationArray[2], 2));
 
   if (abs(abs(newAcceleration) - abs(acceleration)) > 0.5)
-    wasTapped = true;
+    wasTapped = Time.now();
 
   acceleration = newAcceleration;
 
