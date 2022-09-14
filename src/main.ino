@@ -16,7 +16,7 @@
 
 ADXL345 adxl;
 double acceleration = 0.0;
-long long wasTapped = 0;
+long wasTapped = 0;
 
 double light = 0;
 int lightRaw = 0;
