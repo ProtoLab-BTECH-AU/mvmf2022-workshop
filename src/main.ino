@@ -15,7 +15,7 @@
 #define SENSOR_GL5528_PIN A0
 
 ADXL345 adxl;
-double acceleration = 0.0;
+double acceleration = 1.0;
 long wasTapped = 0;
 
 double light = 0;
@@ -103,7 +103,7 @@ void setup()
 
 void loop()
 {
-  if (Time.now() - wasTapped >= 5000)
+  if (Time.now() - wasTapped >= 5)
   {
     wasTapped = 0;
   }
