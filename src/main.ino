@@ -29,7 +29,9 @@ int setLightThreshold(String newThreshold)
   for (unsigned int i = 0; i < newThreshold.length(); i++)
   {
     if (newThreshold[i] < 48 || newThreshold[i] > 57)
+    {
       return -1;
+    }
   }
 
   if (newThreshold.toInt() <= 0)
@@ -122,7 +124,9 @@ void loop()
   double newAcceleration = sqrt(pow(accelerationArray[0], 2) + pow(accelerationArray[1], 2) + pow(accelerationArray[2], 2));
 
   if (abs(abs(newAcceleration) - abs(acceleration)) > 0.5)
+  {
     wasTapped = Time.now();
+  }
 
   acceleration = newAcceleration;
 
