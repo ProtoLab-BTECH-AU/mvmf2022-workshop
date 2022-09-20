@@ -14,7 +14,7 @@ function onLightEvent (lightLevel)                                  -- Event han
 		diff = -diff
 	end
 
-	print(string.format("light client: %d (%f -> %f)", lightLevel, minutesPrev, minutesNew)) -- Print the values in the console log
+	print(string.format("light client: %f (%f -> %f)", lightLevel, minutesPrev, minutesNew)) -- Print the values in the console log
 
 	while Lighting:GetMinutesAfterMidnight() ~= minutesNew do                     -- While the time of day is different than the new value, chage the time
 		wait(.05)                                                                   -- Wait 50 milliseconds between steps
