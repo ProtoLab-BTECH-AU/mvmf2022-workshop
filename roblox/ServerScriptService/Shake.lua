@@ -7,7 +7,7 @@ local shakeStopEvent = ReplicatedStorage:WaitForChild("ShakeStopEvent") -- Get t
 local product = "16909"                                  -- This is the ID of the "product" the particle device belongs to
 local device = "e00fce68c0fae090f645d06f"                -- This is the ID of the particle device
 local token = "3337902341d2ed9551ed753a0f08bcf33c0dcdca" -- This is the user's personal token
-local url = string.format("https://api.particle.io/v1/products/%s/devices/%s/light?access_token=%s", product, device, token)
+local url = string.format("https://api.particle.io/v1/products/%s/devices/%s/wasTapped?access_token=%s", product, device, token)
 
 while (true) do                                  -- Do forever
 	response = HttpService:GetAsync(url, true)     -- Send a GET request to the API endpoint
