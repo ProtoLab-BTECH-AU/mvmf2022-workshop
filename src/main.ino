@@ -6,23 +6,24 @@
  */
 
 #include "Particle.h"
-#include "Wire.h"
 #include "math.h"
-#include "ADXL345.h"
 #include "variables.h"
-#include "light.h"
 
-#define SENSOR_GL5528_PIN A0
+#ifdef SENSOR_ADXL345
+#include "Wire.h"
+#include "ADXL345.h"
 
 ADXL345 adxl;
 double acceleration = 1.0;
 long wasTapped = 0;
+#endif
 
+#ifdef SENSOR_GL5528
+#include "light.h"
+#define SENSOR_GL5528_PIN A0
 double light = 0;
 int lightRaw = 0;
 int lightThreshold = 2048;
-
-unsigned int loopCounter = 0;
 
 int setLightThreshold(String newThreshold)
 {
@@ -40,9 +41,13 @@ int setLightThreshold(String newThreshold)
   lightThreshold = newThreshold.toInt();
   return lightThreshold;
 }
+#endif
+
+unsigned int loopCounter = 0;
 
 void setup()
 {
+#ifdef SENSOR_ADXL345
   Wire.begin();
 
   adxl.powerOn();
@@ -90,33 +95,28 @@ void setup()
   adxl.setInterrupt(ADXL345_INT_ACTIVITY_BIT, 1);
   adxl.setInterrupt(ADXL345_INT_INACTIVITY_BIT, 1);
 
-  Particle.variable("version", VERSION);
-
   Particle.variable("wasTapped", wasTapped);
   Particle.variable("acceleration", acceleration);
+#endif
 
+#ifdef SENSOR_GL5528
   Particle.variable("light", light);
   Particle.variable("lightRaw", lightRaw);
   Particle.variable("lightThreshold", lightThreshold);
   Particle.function("setLightThreshold", setLightThreshold);
+#endif
 
+  Particle.variable("version", VERSION);
   Particle.publish("version", VERSION);
 }
 
 void loop()
 {
+#ifdef SENSOR_ADXL345
   if (Time.now() - wasTapped >= 5)
   {
     wasTapped = 0;
   }
-
-  lightRaw = getLight(SENSOR_GL5528_PIN);
-  int lightNew = lightRaw;
-  if (lightNew >= lightThreshold)
-  {
-    lightNew = lightThreshold;
-  }
-  light = ((double)(lightNew)) / lightThreshold;
 
   double accelerationArray[3];
   adxl.getAcceleration(accelerationArray);
@@ -129,6 +129,17 @@ void loop()
   }
 
   acceleration = newAcceleration;
+#endif
+
+#ifdef SENSOR_GL5528
+  lightRaw = getLight(SENSOR_GL5528_PIN);
+  int lightNew = lightRaw;
+  if (lightNew >= lightThreshold)
+  {
+    lightNew = lightThreshold;
+  }
+  light = ((double)(lightNew)) / lightThreshold;
+#endif
 
   loopCounter++;
   delay(1);
