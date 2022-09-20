@@ -4,9 +4,23 @@
     "platform": "argon",
     "deviceos": "5.0.0",
     "product": "16909",
-    "settings": [],
+    "settings": [
+      "SENSOR_ADXL345"
+    ],
     "devices": [
       "e00fce68c0fae090f645d06f"
+    ]
+  },
+  {
+    "name": "argon",
+    "platform": "argon",
+    "deviceos": "5.0.0",
+    "product": "16909",
+    "settings": [
+      "SENSOR_GL5528"
+    ],
+    "devices": [
+      "e00fce682d1f01ae05356fc7"
     ]
   }
 ]
