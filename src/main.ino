@@ -116,7 +116,7 @@ void loop()
   {
     lightNew = lightThreshold;
   }
-  light = (((double)(lightNew)) / lightThreshold) * 100;
+  light = ((double)(lightNew)) / lightThreshold;
 
   double accelerationArray[3];
   adxl.getAcceleration(accelerationArray);
