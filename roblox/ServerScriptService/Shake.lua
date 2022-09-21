@@ -12,7 +12,7 @@ local url = string.format("https://api.particle.io/v1/products/%s/devices/%s/was
 function loop ()
 	while (true) do                                    -- Do forever
 		local response = HttpService:GetAsync(url, true) -- Send a GET request to the API endpoint
-		loca data = HttpService:JSONDecode(response)     -- Get the JSON values from the response
+		local data = HttpService:JSONDecode(response)     -- Get the JSON values from the response
 		print(string.format("shake: %d", data.result))   -- Print the result in the console log
 		if (data.result > 0) then                        -- If the result is positive (i.e. the device was shaken) trigger the shake start event for all clients
 			shakeEvent:FireAllClients()
