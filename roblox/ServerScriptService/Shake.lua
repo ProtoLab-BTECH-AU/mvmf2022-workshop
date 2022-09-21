@@ -24,8 +24,9 @@ function loop ()
 end
 
 while (true) do
-	if not pcall(loop) then
-		print("shake: an error occurred")
+	local _, err = pcall(loop)
+	if err then
+		print(string.format("shake: error: %s", err))
 	end
 	wait(5)
 end

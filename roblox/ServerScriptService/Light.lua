@@ -19,8 +19,9 @@ function loop ()
 end
 
 while (true) do
-	if not pcall(loop) then
-		print("light: cannot connect")
+	local _, err = pcall(loop)
+	if err then
+		print(string.format("light: error: %s", err))
 	end
 	wait(5)
 end
